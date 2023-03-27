@@ -1,44 +1,96 @@
-//
-//  JS File
-//  You may remove the code below - it's just boilerplate
-//
+const todo = document.getElementById("todo");
+const input = todo.querySelector("#input")
+const itemContainer = document.getElementById("items")
 
-//
-// Variables
-//
+let toDoList = [];
 
-// Constants
-const appID = "app";
-const headingText = "To do. To done. ✅";
+todo.addEventListener('submit', function(event) {
+  event.preventDefault();
+  addToDo()
+});
 
-// Variables
+if (!toDoList.length) {
+  // display empty blah blah blah
+}
 
-// DOM Elements
-let appContainer = document.getElementById(appID);
+// adds a to do object to the array
+function addToDo() {
 
-//
-// Functions
-//
+  // get the input value
+  const val = input.value;
 
-// Add a heading to the app container
-function inititialise() {
-  // If anything is wrong with the app container then end
-  if (!appContainer) {
-    console.error("Error: Could not find app contianer");
+  // if the value is empty
+  if (val == '') {
+    alert('The task was empty: Please input a task')
+    return;
+  }
+  
+  // if the value is contained in the array (not case sensitive)
+  if (toDoList.some(elem => elem.id.toUpperCase() === val.toUpperCase())) {
+    alert('This task already exists')
     return;
   }
 
-  // Create an h1 and add it to our app
-  const h1 = document.createElement("h1");
-  h1.innerText = headingText;
-  appContainer.appendChild(h1);
+  // create the object with the input value and the checked value
+  const object = {
+    input: val,
+    checked: false
+  }
 
-  // Init complete
-  console.log("App successfully initialised");
+  elem = addElem(object);
+  toDoList.push(elem);
+  
+  // reset the input value
+  input.value = '';
+
+  // log the list
+  console.log(toDoList);
 }
 
-//
-// Inits & Event Listeners
-//
+// adds the to do object to the HTML
+function addElem(data) {
+  const elem = document.createElement("div");
+  elem.setAttribute('id', data.input);
+  elem.setAttribute('class', 'item unchecked');
+  itemContainer.appendChild(elem);
+  elem.classList.add("item");
 
-inititialise();
+  let itemContent = [
+    {type: "h6", text: data.input, class: 'label', function: ''},
+    {type: "button", text: 'DEL', class: 'delete', function: 'delete'},
+    {type: "button", text: 'CHECK', class: 'checkbox', function: 'check'}
+  ]
+
+  createElemChildren(elem, itemContent);
+  
+  return elem;
+}
+
+function createElemChildren(elem, content) {
+  
+  for (var i = 0; i < content.length; i++) {
+    const child = document.createElement(content[i].type);
+    child.setAttribute('class', content[i].class);
+    child.textContent += content[i].text;
+    elem.appendChild(child);
+
+    if (content[i].function == 'delete') {
+      child.addEventListener('click', function() {
+        let index = toDoList.findIndex(element => element.id == content[0].text);
+        toDoList.splice(index, 1);
+        elem.parentNode.removeChild(elem);
+        console.log(toDoList);
+      })
+    }
+
+    else if (content[i].function == 'check') {
+      child.addEventListener('click', function() {
+        if (elem.className == 'item unchecked') {
+          elem.setAttribute('class', 'item checked');
+        }
+        else { elem.setAttribute('class', 'item unchecked') };
+      })
+    }
+    
+  }
+}
