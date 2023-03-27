@@ -57,8 +57,8 @@ function addElem(data) {
 
   let itemContent = [
     {type: "h6", text: data.input, class: 'label', function: ''},
-    {type: "button", text: 'DEL', class: 'delete', function: 'delete'},
-    {type: "button", text: 'CHECK', class: 'checkbox', function: 'check'}
+    {type: "button", text: '', class: 'delete', function: 'delete'},
+    {type: "button", text: '', class: 'checkbox', function: 'check'}
   ]
 
   createElemChildren(elem, itemContent);
