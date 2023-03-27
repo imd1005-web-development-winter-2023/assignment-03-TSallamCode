@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- Set the page title -->
-    <title>Assignment 03</title>
+    <title>To Do List</title>
 
     <!-- Set the charset we're using to UTF-8 -->
     <meta charset="UTF-8" />
@@ -19,27 +19,26 @@
     <!-- Set the Favicon  -->
     <link rel="icon" href="./images/favicon/rocket.svg" type="image/svg+xml" />
   </head>
+
+
   <body>
-    <!--
 
-      ADD YOUR ASSIGNMENT 03 CODE
-
-      YOU MAY REMOVE THE BOILERPLATE CODE BELOW
-
-      IMPORTANT CHECKLIST:
-
-      - Are users able to create and delete to do list items?
-      - Have you set a favicon? (included - but it's a rocket)
-      - Do you have a css reset file? (included)
-      - Has a team member conducted a code review and left a GitHub Issue in your repo?
-      - Have you conducted a code review and left a GitHub Issue on your team member's repo?
-
-    -->
     <main>
-      <div id="app"></div>
-    </main>
+      <div class = "container">
 
-    <!-- This is where we add our awesome JavaScript code -->
-    <script src="./main.js"></script>
+        <form id = "todo">
+          <input type = "text" name = "input" id = "input">
+          <button type = "submit">+</button>
+        </form>
+
+        <div id = "items">
+          <div id = 'value'></div>
+          <!-- JAVASCRIPT ITEMS ARE ADDED HERE-->
+        </div>
+
+      </div>
+      
+    </main>
+    <script src="main.js"></script>
   </body>
 </html>
