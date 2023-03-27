@@ -66,14 +66,19 @@ function addElem(data) {
   return elem;
 }
 
+// creates children of element based on array of objects passed in
 function createElemChildren(elem, content) {
   
+  // loop through array of objects
   for (var i = 0; i < content.length; i++) {
-    const child = document.createElement(content[i].type);
-    child.setAttribute('class', content[i].class);
-    child.textContent += content[i].text;
-    elem.appendChild(child);
 
+    // create an element with the iteration object's type
+    const child = document.createElement(content[i].type);
+    child.setAttribute('class', content[i].class); // set the class to the iteration object's class
+    child.textContent += content[i].text; // add the text content of the iteration object's text
+    elem.appendChild(child); // append the child to the parent
+
+    // if the function of the element is deletion
     if (content[i].function == 'delete') {
       child.addEventListener('click', function() {
         let index = toDoList.findIndex(element => element.id == content[0].text);
@@ -83,6 +88,7 @@ function createElemChildren(elem, content) {
       })
     }
 
+    // if the function of the element is checking
     else if (content[i].function == 'check') {
       child.addEventListener('click', function() {
         if (elem.className == 'item unchecked') {
